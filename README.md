@@ -10,8 +10,8 @@
 
 С подробным скринкастом вы можете ознакомиться по ссылке:
 
-https://drive.google.com/file/d/1izAJ2OmYyMsNwml4kAkCuKGPS3bKCY-r/view
-
+[https://drive.google.com/file/d/1izAJ2OmYyMsNwml4kAkCuKGPS3bKCY-r/view
+](https://drive.google.com/file/d/1dhlb-BQqPNzqiFKnoA5BNF2oNKqtIS6w/view?usp=drive_link)
 
 ## Особенности
 
