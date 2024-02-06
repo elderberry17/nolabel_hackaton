@@ -72,7 +72,7 @@ def generate_answer_gigachat(message, language):
 
     with (GigaChat(
             credentials=GIGACHAT_API_KEY,
-            verify_ssl_certs=False, model="GigaChat-Pro", repetition_penalty=1.07,
+            verify_ssl_certs=False, model="GigaChat:latest", repetition_penalty=1.07,
             stream=False) as giga):
         payload.messages.append(Messages(role=MessagesRole.USER, content=message))
         response = giga.chat(payload)
@@ -119,11 +119,11 @@ def prettify(text):
 
 
 def convert_to_moodle_format(text, question_marker, tag):
-    json_str = re.sub(r'(\W)\'(.*?)\'', r'\1"\2"', re.sub(r'\'(.*?)\'(\W)', r'"\1"\2', re.sub(r",\s+]", "\n]", text.replace(",]", "]"))))
+    text = text.strip()
+    json_str = re.sub(r'(\W)\'(.*?)\'', r'\1"\2"', re.sub(r'\'(.*?)\'(\W)', r'"\1"\2', re.sub(r",\s+]", "\n]", text.replace('\\"', '').replace('"', '').replace(",]", "]"))))
     formatted_str = ""
     try:
         full_data = json.loads(json_str)
-        shuffle(full_data)
         if question_marker == 'верно/неверно':
             for data in full_data:
                 question = data['утверждение']
@@ -154,7 +154,6 @@ def convert_to_moodle_format(text, question_marker, tag):
         formatted_str = ""
         try:
             full_data = json.loads(json_str)
-            shuffle(full_data)
             if question_marker == 'верно/неверно':
                 for data in full_data:
                     question = data['statement']
@@ -183,7 +182,7 @@ def convert_to_moodle_format(text, question_marker, tag):
                     formatted_str += "\n"
         except Exception as e:
             st.sidebar.warning('Некорректный JSON-формат, сгенерируйте вопросы ещё раз!')
-            return
+            return None
     return formatted_str
 
 
